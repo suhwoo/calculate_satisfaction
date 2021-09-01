@@ -35,29 +35,37 @@ int main() {
 	int placeNum;
 	int travelTime;
 
-	string temp = "";
+	string tempString = "";
 	string delimiter = ",";
-	
+	size_t pos = 0;
 
+	vector<string> words{};
 	string name = "";
 	int time;
 	int sati;
 
 	cin >> placeNum >> travelTime;
-	//1.주어진 여행시간 n보다 오래걸리는 경로를 제외
+	
 	for (int num = 0; num < placeNum; num++) {
-		//콤마로 구분해서 input 받기
-		cin >> temp;
-		
-		//예외처리. 여행시간보다 장소를 가는 시간이 더 길 경우, 애초에 여행경로에 넣지않는다.
+		//1.콤마로 구분해서 input 받기
+		cin >> tempString;
+		while ((pos = tempString.find(delimiter)) != string::npos) {
+			words.push_back(tempString.substr(0, pos));
+			tempString.erase(0, pos + delimiter.length());
+		}
+		name = words[0];
+		time = stoi(words[1]);
+		sati = stoi(tempString);
+		words.clear();
+		//2.예외처리. 여행시간 n보다 장소를 소요 시간이 더 길 경우, 애초에 여행경로에 넣지않는다.
 		if (time > travelTime)continue;
 		//아닐 경우, 경로로 채택될 수 있으므로 vector에 넣는다.
 		Node temp = { name,time,sati };
 		travelList.push_back(temp);
 	}
-	//2.dfs이용해서 경로를 정한다. 경로로 채택되거나 혹은 채택되지 않거나
+	//3.dfs이용해서 경로를 정한다. 경로로 채택되거나 혹은 채택되지 않거나
 	findRoute(travelTime,0,0,0);
-	//3.구해진 경우의 수 중에 가장 만족도 총합이 높은 경로 출력하기
+	//4.구해진 경우의 수 중에 가장 만족도 총합이 높은 경로 출력하기
 	cout << maxSati;
 	return 0;
 }
