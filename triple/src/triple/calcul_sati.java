@@ -39,21 +39,17 @@ public class calcul_sati {
 		findRoute(travelList,totalTime,nowIndex+1,nowTime,nowSati);
 		
 	}
-	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
+	public static int printSati(int placeNum,int travelTime,ArrayList<String> travelingPlace) {
 		//input 저장
-		int placeNum= in.nextInt();
-		int travelTime = in.nextInt();
-		String tempString=in.nextLine();
-		
 		String name=null;
 		int time=0;
 		int sati=0;
+		String tempString=null;
 		ArrayList<Node> travelList=new ArrayList<Node>();
 		
 		//1.주어진 여행시간 n보다 오래걸리는 경로를 제외
 		for(int num=0;num<placeNum;num++) {
-			tempString=in.nextLine();
+			tempString = travelingPlace.get(num);
 			//콤마로 구분해서 input 받기
 			String[] words = tempString.split(",");
 			name=words[0];
@@ -66,7 +62,7 @@ public class calcul_sati {
 		//2.dfs이용해서 경로를 정한다. 경로로 채택되거나 혹은 채택되지 않거나
 		findRoute(travelList,travelTime,0,0,0);
 		//3.구해진 경우의 수 중에 가장 만족도 총합이 높은 경로 출력하기
-		System.out.println(max_sati);
+		return max_sati;
 		
 		
 	}
