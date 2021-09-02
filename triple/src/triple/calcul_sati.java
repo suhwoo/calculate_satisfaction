@@ -44,7 +44,9 @@ public class calcul_sati {
 		String name=null;
 		int time=0;
 		int sati=0;
+		max_sati=-1;
 		String tempString=null;
+		
 		ArrayList<Node> travelList=new ArrayList<Node>();
 		
 		//1.주어진 여행시간 n보다 오래걸리는 경로를 제외
